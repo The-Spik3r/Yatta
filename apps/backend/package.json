@@ -9,17 +9,27 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "hono": "^4.0.0",
     "@hono/node-server": "^1.19.5",
-    "@yatta/shared": "workspace:*"
+    "@yatta/shared": "workspace:*",
+    "better-sqlite3": "^12.4.1",
+    "drizzle-orm": "^0.44.7",
+    "drizzle-zod": "^0.8.3",
+    "hono": "^4.0.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20.8.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "drizzle-kit": "^0.31.5",
     "eslint": "^8.45.0",
     "tsx": "^4.6.0",
     "typescript": "^5.2.2"
