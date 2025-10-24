@@ -1,26 +1,18 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 
 function App() {
-    const [count, setCount] = useState(0)
-
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>🎯 Yatta Client</h1>
-                <div className="card">
-                    <button onClick={() => setCount((count) => count + 1)}>
-                        count is {count}
-                    </button>
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to test HMR
-                    </p>
-                </div>
-                <p className="read-the-docs">
-                    Click on the Vite and React logos to learn more
-                </p>
-            </header>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="*" element={<NotFound />} />
+                </Route>
+            </Routes>
+        </Router>
     )
 }
 
