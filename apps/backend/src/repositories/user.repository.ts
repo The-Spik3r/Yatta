@@ -9,6 +9,10 @@ export interface IUserRepository {
   create(user: NewUser): Promise<User>
   update(id: number, user: Partial<NewUser>): Promise<User | undefined>
   delete(id: number): Promise<boolean>
+  updateLastLogin(id: number): Promise<void>
+  updateResetToken(email: string, token: string, expiry: string): Promise<void>
+  findByResetToken(token: string): Promise<User | undefined>
+  clearResetToken(id: number): Promise<void>
 }
 
 export class UserRepository implements IUserRepository {
@@ -59,5 +63,46 @@ export class UserRepository implements IUserRepository {
   async delete(id: number): Promise<boolean> {
     const result = await db.delete(users).where(eq(users.id, id)).returning()
     return result.length > 0
+  }
+
+  async updateLastLogin(id: number): Promise<void> {
+    await db
+      .update(users)
+      .set({ lastLogin: new Date().toISOString() })
+      .where(eq(users.id, id))
+  }
+
+  async updateResetToken(
+    email: string,
+    token: string,
+    expiry: string
+  ): Promise<void> {
+    await db
+      .update(users)
+      .set({
+        resetToken: token,
+        resetTokenExpiry: expiry,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(users.email, email))
+  }
+
+  async findByResetToken(token: string): Promise<User | undefined> {
+    const result = await db
+      .select()
+      .from(users)
+      .where(eq(users.resetToken, token))
+    return result[0]
+  }
+
+  async clearResetToken(id: number): Promise<void> {
+    await db
+      .update(users)
+      .set({
+        resetToken: null,
+        resetTokenExpiry: null,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(users.id, id))
   }
 }

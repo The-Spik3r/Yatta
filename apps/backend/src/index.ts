@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { prettyJSON } from 'hono/pretty-json'
-import { userRoutes } from './routes'
+import { userRoutes, authRoutes } from './routes'
 
 const app = new Hono()
 
@@ -38,6 +38,7 @@ app.get('/api/health', c => {
 })
 
 // API Routes
+app.route('/api/auth', authRoutes)
 app.route('/api/users', userRoutes)
 
 // 404 handler

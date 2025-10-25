@@ -1,1 +1,5 @@
 export * from './user.service'
+export * from './hash.service'
+export * from './jwt.service'
+export * from './email.service'
+export * from './auth.service'

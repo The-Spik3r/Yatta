@@ -1,12 +1,13 @@
 import { Hono } from 'hono'
 import { userController } from '../controllers'
+import { authMiddleware, optionalAuthMiddleware } from '../middleware'
 
 const userRoutes = new Hono()
 
-userRoutes.get('/', userController.getAllUsers)
-userRoutes.get('/:id', userController.getUserById)
-userRoutes.post('/', userController.createUser)
-userRoutes.put('/:id', userController.updateUser)
-userRoutes.delete('/:id', userController.deleteUser)
+// Protected routes - require authentication
+userRoutes.get('/', authMiddleware, userController.getAllUsers)
+userRoutes.get('/:id', optionalAuthMiddleware, userController.getUserById)
+userRoutes.put('/:id', authMiddleware, userController.updateUser)
+userRoutes.delete('/:id', authMiddleware, userController.deleteUser)
 
 export { userRoutes }
