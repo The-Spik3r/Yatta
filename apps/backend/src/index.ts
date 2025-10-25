@@ -57,6 +57,7 @@ app.get('/doc', async c => {
 // Middlewares
 app.use('*', logger())
 app.use('*', prettyJSON())
+app.use('*', cors()) // Enable CORS for all routes
 app.use(
   '/api/*',
   cors({

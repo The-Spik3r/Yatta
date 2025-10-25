@@ -43,10 +43,8 @@ export class AuthService implements IAuthService {
   async register(
     userData: z.infer<typeof registerUserSchema>
   ): Promise<RegisterResponse> {
-    // Validate input
     const validatedData = registerUserSchema.parse(userData)
 
-    // Check if user already exists
     const existingUser = await this.userRepository.findByEmail(
       validatedData.email
     )
@@ -54,30 +52,25 @@ export class AuthService implements IAuthService {
       throw new Error('User with this email already exists')
     }
 
-    // Hash password
     const hashedPassword = await hashService.hashPassword(
       validatedData.password
     )
 
-    // Create user
     const newUser = await this.userRepository.create({
       ...validatedData,
       password: hashedPassword,
       emailVerified: false,
     })
 
-    // Generate tokens
     const tokens = jwtService.generateTokenPair({
       userId: newUser.id,
       email: newUser.email,
     })
 
-    // Send welcome email (don't await to avoid blocking)
     emailService
       .sendWelcomeEmail(newUser.email, newUser.name)
       .catch(console.error)
 
-    // Remove sensitive data
     const {
       password,
       resetToken,
@@ -95,10 +88,8 @@ export class AuthService implements IAuthService {
   async login(
     credentials: z.infer<typeof loginUserSchema>
   ): Promise<LoginResponse> {
-    // Validate input
     const validatedCredentials = loginUserSchema.parse(credentials)
 
-    // Find user by email
     const user = await this.userRepository.findByEmail(
       validatedCredentials.email
     )
@@ -106,7 +97,6 @@ export class AuthService implements IAuthService {
       throw new Error('Invalid email or password')
     }
 
-    // Verify password
     const isPasswordValid = await hashService.comparePassword(
       validatedCredentials.password,
       user.password
@@ -115,10 +105,8 @@ export class AuthService implements IAuthService {
       throw new Error('Invalid email or password')
     }
 
-    // Update last login
     await this.userRepository.updateLastLogin(user.id)
 
-    // Generate tokens
     const tokens = jwtService.generateTokenPair({
       userId: user.id,
       email: user.email,
@@ -142,31 +130,25 @@ export class AuthService implements IAuthService {
   async forgotPassword(
     data: z.infer<typeof forgotPasswordSchema>
   ): Promise<{ message: string }> {
-    // Validate input
     const validatedData = forgotPasswordSchema.parse(data)
 
-    // Find user by email
     const user = await this.userRepository.findByEmail(validatedData.email)
     if (!user) {
-      // Return success message even if user doesn't exist (security best practice)
       return {
         message:
           'If an account with that email exists, we have sent a password reset link.',
       }
     }
 
-    // Generate reset token
     const resetToken = jwtService.generateResetToken()
-    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000).toISOString() // 1 hour
+    const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000).toISOString()
 
-    // Save reset token
     await this.userRepository.updateResetToken(
       user.email,
       resetToken,
       resetTokenExpiry
     )
 
-    // Send reset email
     const emailSent = await emailService.sendPasswordResetEmail(
       user.email,
       resetToken

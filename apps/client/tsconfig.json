@@ -24,7 +24,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@yatta/shared": ["../../packages/shared/src"]
+      "@yatta/shared": ["../../packages/shared/dist"],
+      "@yatta/shared/*": ["../../packages/shared/dist/*"]
     }
   },
   "include": ["src"],

@@ -5,7 +5,6 @@ export default function HomePage() {
     return (
         <div className="min-h-screen bg-white relative overflow-hidden flex">
             <aside className="w-16 bg-white flex flex-col items-center py-6 z-20 relative border-r border-black">
-                {/* Hamburger menu */}
                 <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors mb-auto">
                     <svg className="w-6 h-6 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <line x1="3" y1="6" x2="21" y2="6" />
@@ -14,7 +13,6 @@ export default function HomePage() {
                     </svg>
                 </button>
 
-                {/* Social media icons at bottom */}
                 <div className="flex flex-col gap-6">
                     <a href="#" className="text-gray-800 hover:text-red-600 transition-colors">
                         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -47,7 +45,6 @@ export default function HomePage() {
             </div>
 
             <div className="flex-1 relative z-10">
-                {/* Top right download button */}
                 <div className="absolute top-6 right-8">
                     <Button
                         variant="outline"
@@ -57,10 +54,8 @@ export default function HomePage() {
                     </Button>
                 </div>
 
-                {/* Main content */}
                 <div className="flex items-center h-full px-16 py-12 gap-16">
-                    {/* Left side - Hero content */}
-                    <div className="flex-1 max-w-xl z-20 relative">
+                    <div className="flex-1 max-w-xl">
                         <h1 className="text-6xl font-bold text-white mb-6 leading-tight">
                             Yatta.study<br />Track Your Progress
                         </h1>
@@ -72,9 +67,7 @@ export default function HomePage() {
                         </Button>
                     </div>
 
-                    {/* Right side - App mockup */}
                     <div className="flex-1 flex items-center justify-center relative">
-                        {/* Floating task cards */}
                         <div className="absolute left-[-120px] top-20 bg-white rounded-2xl shadow-md p-4 w-44 rotate-[-10deg] hover:rotate-0 transition-transform border border-gray-100">
                             <div className="flex items-center gap-3 mb-2">
                                 <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
@@ -112,9 +105,7 @@ export default function HomePage() {
                             </div>
                             <p className="text-sm font-medium text-gray-800">view stats</p>
                         </div>
-                        {/* Main phone mockup */}
                         <div className="bg-white rounded-[3rem] shadow-md p-6 w-[360px] border-[4px] border-gray-100 relative z-10">
-                            {/* Phone header */}
                             <div className="flex items-center justify-between mb-6">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
@@ -125,7 +116,6 @@ export default function HomePage() {
                                 <Bell className="w-5 h-5 text-gray-600" />
                             </div>
 
-                            {/* Balance section */}
                             <div className="mb-6">
                                 <p className="text-sm text-gray-500 mb-1">Study streak</p>
                                 <div className="flex items-center justify-between">
@@ -136,7 +126,6 @@ export default function HomePage() {
                                 </div>
                             </div>
 
-                            {/* Calendar grid */}
                             <div className="grid grid-cols-7 gap-2 mb-6">
                                 {[0, 1, 2, 3, 4, 5, 6].map((i) => (
                                     <div key={`row1-${i}`} className={`h-10 rounded-lg ${i <= 3 ? "bg-red-600" : "bg-gray-100"}`} />
@@ -150,7 +139,6 @@ export default function HomePage() {
                                 ))}
                             </div>
 
-                            {/* Task cards inside phone */}
                             <div className="space-y-3">
                                 <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-between">
                                     <div className="flex items-center gap-3">

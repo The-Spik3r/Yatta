@@ -10,7 +10,6 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-        // Colores primarios específicos del proyecto
         'rojo-intenso': '#E60012', // energía, determinación, foco
         'blanco-puro': '#FFFFFF', // simplicidad, calma, claridad
         'negro-carbon': '#111111', // contraste moderno, elegancia
@@ -27,20 +26,20 @@ export default {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: '#E60012', // Rojo intenso como primary
-          foreground: '#FFFFFF', // Blanco puro para el texto sobre primary
+          DEFAULT: '#E60012',
+          foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#FFFFFF', // Blanco puro como secondary
-          foreground: '#111111', // Negro carbón para el texto sobre secondary
+          DEFAULT: '#FFFFFF',
+          foreground: '#111111',
         },
         muted: {
-          DEFAULT: '#CFCFCF', // Gris humo como fourth (muted)
-          foreground: '#111111', // Negro carbón para el texto sobre muted
+          DEFAULT: '#CFCFCF',
+          foreground: '#111111',
         },
         accent: {
-          DEFAULT: '#111111', // Negro carbón como third (accent)
-          foreground: '#FFFFFF', // Blanco puro para el texto sobre accent
+          DEFAULT: '#111111',
+          foreground: '#FFFFFF',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',

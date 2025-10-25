@@ -7,7 +7,8 @@ import {
   loginUserSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
-} from '../database/schema'
+  refreshTokenSchema,
+} from '@yatta/shared'
 import { z } from 'zod'
 
 const authRoutes = new Hono()
@@ -88,12 +89,7 @@ authRoutes.post(
       401: { description: 'Invalid refresh token' },
     },
   }),
-  zValidator(
-    'json',
-    z.object({
-      refreshToken: z.string().describe('Refresh token'),
-    })
-  ),
+  zValidator('json', refreshTokenSchema),
   authController.refreshToken
 )
 

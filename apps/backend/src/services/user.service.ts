@@ -37,10 +37,8 @@ export class UserService implements IUserService {
   }
 
   async createUser(userData: NewUser): Promise<User> {
-    // Validate input data
     const validatedData = insertUserSchema.parse(userData)
 
-    // Check if user already exists
     const existingUser = await this.userRepository.findByEmail(
       validatedData.email
     )
@@ -59,13 +57,11 @@ export class UserService implements IUserService {
       throw new Error('Invalid user ID')
     }
 
-    // Check if user exists
     const existingUser = await this.userRepository.findById(id)
     if (!existingUser) {
       return null
     }
 
-    // If email is being updated, check for conflicts
     if (userData.email && userData.email !== existingUser.email) {
       const emailUser = await this.userRepository.findByEmail(userData.email)
       if (emailUser && emailUser.id !== id) {
@@ -73,7 +69,6 @@ export class UserService implements IUserService {
       }
     }
 
-    // Validate partial data
     if (userData.name !== undefined || userData.email !== undefined) {
       const partialSchema = insertUserSchema.partial()
       partialSchema.parse(userData)
@@ -92,6 +87,5 @@ export class UserService implements IUserService {
   }
 }
 
-// Create service instance
 const userRepository = new UserRepository()
 export const userService = new UserService(userRepository)

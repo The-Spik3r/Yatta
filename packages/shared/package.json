@@ -11,6 +11,10 @@
     "lint": "eslint src --ext .ts",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "zod": "^3.22.4",
+    "drizzle-zod": "^0.5.1"
+  },
   "devDependencies": {
     "@types/node": "^20.8.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
