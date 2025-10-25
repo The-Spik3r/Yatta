@@ -17,12 +17,17 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.19.5",
+    "@hono/standard-validator": "^0.1.5",
+    "@hono/zod-openapi": "^1.1.4",
+    "@hono/zod-validator": "^0.7.4",
+    "@scalar/hono-api-reference": "^0.9.22",
     "@yatta/shared": "workspace:*",
     "bcryptjs": "^3.0.2",
     "better-sqlite3": "^12.4.1",
     "drizzle-orm": "^0.44.7",
     "drizzle-zod": "^0.8.3",
     "hono": "^4.0.0",
+    "hono-openapi": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.10",
     "zod": "^4.1.12"

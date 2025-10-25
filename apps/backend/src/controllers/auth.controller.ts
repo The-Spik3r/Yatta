@@ -217,6 +217,22 @@ export class AuthController {
       return c.json({ error: 'Internal server error' }, 500)
     }
   }
+
+  me = async (c: Context) => {
+    try {
+      // The user should be set by the auth middleware
+      const user = c.get('user')
+
+      if (!user) {
+        return c.json({ error: 'User not found in context' }, 401)
+      }
+
+      return c.json({ user })
+    } catch (error) {
+      console.error('Error getting user profile:', error)
+      return c.json({ error: 'Internal server error' }, 500)
+    }
+  }
 }
 
 // Create controller instance
